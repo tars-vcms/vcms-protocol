@@ -1,0 +1,76 @@
+syntax="proto3";
+package tars_vcms.config.config_writer;
+
+option go_package ="config-writer";
+
+service ConfigWriter{
+  rpc InsertConfig(InsertConfigRequest) returns(InsertConfigReply);
+
+  rpc GetConfigs(GetConfigsRequest) returns(GetConfigsReply);
+
+  rpc UpdateConfig(UpdateConfigRequest) returns(UpdateConfigReply);
+}
+
+enum STATUS_TYPE{
+  ONLINE = 0;
+  OFFLINE = 1;
+}
+
+enum ITEM_TYPE{
+  TEXT = 0;
+  JSON = 1;
+  YAML = 2;
+}
+
+
+message Config{
+  uint64              ID = 1;
+  string              Secret = 2;
+  STATUS_TYPE         Type = 3;
+  string              Comment = 4;
+  repeated ConfigEnv  Env = 5;
+  uint64              CreatedAt = 6;
+}
+
+message ConfigEnv{
+  uint64                ID = 1;
+  uint64                ConfigID = 2;
+  repeated ConfigItem   item = 3;
+  string                Name = 4;
+  uint64                CreatedAt = 5;
+}
+
+message ConfigItem{
+  uint64                ID = 1;
+  uint64                ConfigEnvID = 2;
+  uint64                Version = 3;
+  string                Name = 4;
+  ITEM_TYPE             Type = 5;
+  string                Content = 6;
+  string                Comment = 7;
+  uint64                CreatedAt = 8;
+}
+
+message InsertConfigRequest{
+  uint64 Cid = 1; //ConfigID
+}
+
+message InsertConfigReply{
+  Config  config = 1;
+}
+
+message GetConfigsRequest{
+  repeated uint64 Cid = 1;
+}
+
+message GetConfigsReply{
+  repeated Config config = 1;
+}
+
+message UpdateConfigRequest{
+  Config config = 1;
+}
+
+message UpdateConfigReply{
+  Config config = 1;
+}
