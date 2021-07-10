@@ -26,7 +26,7 @@ enum ITEM_TYPE{
 message Config{
   uint64              ID = 1;
   string              Secret = 2;
-  STATUS_TYPE         Type = 3;
+  STATUS_TYPE         Status = 3;
   string              Comment = 4;
   repeated ConfigEnv  Env = 5;
   uint64              CreatedAt = 6;
@@ -56,7 +56,7 @@ message InsertConfigRequest{
 }
 
 message InsertConfigReply{
-  Config  config = 1;
+  Config  Config = 1;
 }
 
 message GetConfigsRequest{
@@ -65,13 +65,13 @@ message GetConfigsRequest{
 }
 
 message GetConfigsReply{
-  repeated Config config = 1;
+  repeated Config Config = 1;
 }
 
 message UpdateConfigRequest{
-  Config config = 1;
+  Config Config = 1;
 }
 
 message UpdateConfigReply{
-  Config config = 1;
+  Config Config = 1;
 }
