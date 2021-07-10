@@ -29,7 +29,7 @@ message Config{
   STATUS_TYPE         Status = 3;
   string              Comment = 4;
   repeated ConfigEnv  Env = 5;
-  uint64              CreatedAt = 6;
+  int64              CreatedAt = 6;
 }
 
 message ConfigEnv{
@@ -37,7 +37,7 @@ message ConfigEnv{
   uint64                ConfigID = 2;
   repeated ConfigItem   item = 3;
   string                Name = 4;
-  uint64                CreatedAt = 5;
+  int64                CreatedAt = 5;
 }
 
 message ConfigItem{
@@ -48,7 +48,7 @@ message ConfigItem{
   ITEM_TYPE             Type = 5;
   string                Content = 6;
   string                Comment = 7;
-  uint64                CreatedAt = 8;
+  int64                CreatedAt = 8;
 }
 
 message InsertConfigRequest{
