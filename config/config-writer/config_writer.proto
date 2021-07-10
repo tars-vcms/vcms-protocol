@@ -4,7 +4,7 @@ package tars_vcms.config.config_writer;
 option go_package ="config-writer";
 
 service ConfigWriter{
-  rpc InsertConfig(InsertConfigRequest) returns(InsertConfigReply);
+  rpc CreateConfig(CreateConfigRequest) returns(CreateConfigReply);
 
   rpc GetConfigs(GetConfigsRequest) returns(GetConfigsReply);
 
@@ -51,11 +51,11 @@ message ConfigItem{
   int64                CreatedAt = 8;
 }
 
-message InsertConfigRequest{
+message CreateConfigRequest{
   string Name = 1; //ConfigName
 }
 
-message InsertConfigReply{
+message CreateConfigReply{
   Config  Config = 1;
 }
 
