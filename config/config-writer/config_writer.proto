@@ -52,7 +52,7 @@ message ConfigItem{
 }
 
 message InsertConfigRequest{
-  uint64 Cid = 1; //ConfigID
+  string Name = 1; //ConfigName
 }
 
 message InsertConfigReply{
@@ -61,6 +61,7 @@ message InsertConfigReply{
 
 message GetConfigsRequest{
   repeated uint64 Cid = 1;
+  repeated uint64 Name = 2;
 }
 
 message GetConfigsReply{
