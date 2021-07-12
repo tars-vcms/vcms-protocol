@@ -27,9 +27,10 @@ message Config{
   uint64              ID = 1;
   string              Secret = 2;
   STATUS_TYPE         Status = 3;
-  string              Comment = 4;
-  repeated ConfigEnv  Env = 5;
-  int64              CreatedAt = 6;
+  string              Name = 4;
+  string              Comment = 5;
+  repeated ConfigEnv  Env = 6;
+  int64              CreatedAt = 7;
 }
 
 message ConfigEnv{
@@ -41,14 +42,21 @@ message ConfigEnv{
 }
 
 message ConfigItem{
-  uint64                ID = 1;
-  uint64                ConfigEnvID = 2;
-  uint64                Version = 3;
-  string                Name = 4;
-  ITEM_TYPE             Type = 5;
-  string                Content = 6;
-  string                Comment = 7;
-  int64                CreatedAt = 8;
+  uint64                  ID = 1;
+  uint64                  ConfigEnvID = 2;
+  uint64                  ActiveVersion = 3;
+  string                  Name = 4;
+  ITEM_TYPE               Type = 5;
+  repeated ConfigContent  Content = 6;
+  string                  Comment = 7;
+  int64                   CreatedAt = 8;
+}
+
+message ConfigContent{
+  uint64        ID = 1;
+  uint32        Version = 2;
+  string        Content = 3;
+  int64         CreatedAt = 4;
 }
 
 message CreateConfigRequest{
