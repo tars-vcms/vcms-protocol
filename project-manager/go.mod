@@ -1,4 +1,4 @@
-module github.com/tars-vcms/vcms-protocol/project-manage
+module github.com/tars-vcms/vcms-protocol/project-manager
 
 go 1.16
 
