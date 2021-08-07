@@ -1,0 +1,149 @@
+syntax="proto3";
+
+package tars_vcms.project_manager;
+
+option go_package ="project-manager";
+
+
+service ProjectManager{
+  rpc CreateProject(CreateProjectRequest) returns(CreateProjectReply);
+
+  rpc DeleteProject(DeleteProjectRequest) returns(DeleteProjectReply);
+
+  rpc GetProjects(GetProjectsReply) returns(GetProjectsRequest);
+
+  rpc SetProjectStaff(SetProjectStaffRequest) returns(SetProjectStaffReply);
+
+  rpc SetProjectPlugin(SetProjectPluginRequest) returns(SetProjectPluginReply);
+
+}
+
+enum PROJECT_TYPE{
+  // 用于构建平台自身的插件
+  PLUGIN = 0;
+  // 业务项目
+  BUSINESS = 1;
+  // 平台
+  PLATFORM = 2;
+}
+
+enum PROJECT_VISIBILITY{
+  // 开发，产品可见
+  PRODUCT_OWNER = 0;
+
+  // 所有人可见
+  PUBLIC = 1;
+
+  // 有权限的可见
+  HAVE_AUTHORIZATION = 2;
+
+}
+
+enum PLUGIN_STATUS{
+  ENABLED = 0;
+  DISABLED = 1;
+}
+
+
+message Project{
+  uint64 ID = 1;
+
+  string Name = 2;
+
+  PROJECT_VISIBILITY Visibility = 3;
+
+  repeated uint64 DevelopersID = 4;
+
+  repeated uint64 PMsID = 5;
+
+  repeated ProjectPlugin Plugins = 6;
+
+  int64 CreatedAt = 7;
+}
+
+message ProjectPlugin{
+
+  uint64 ProjectID = 1;
+
+  uint64 PluginID = 2;
+
+  map<string,string> PluginInfo = 3;
+
+
+}
+
+message CreateProjectRequest{
+  string Name = 1;
+  // 创建者的用户ID 设置为默认开发
+  uint64 StaffID = 2;
+  // 项目类型，是否为插件
+  PROJECT_TYPE Type = 3;
+
+};
+
+message CreateProjectReply{
+  Project project = 1;
+};
+
+message DeleteProjectRequest{
+
+  // 删除的项目ID
+  uint64 ProjectID = 1;
+
+  // 操作人的ID
+  uint64 StaffID = 2;
+
+  string Reason = 3;
+
+};
+
+message DeleteProjectReply{
+
+};
+
+message GetProjectsRequest{
+
+  // 为空表示根据其他条件搜索
+  uint64 StaffID = 1;
+
+  // 为空表示根据其他条件搜索
+  repeated uint64 ProjectID = 2;
+};
+
+message GetProjectsReply{
+  repeated Project Projects = 1;
+}
+
+message SetProjectStaffRequest{
+
+  // 操作人ID
+  uint64 StaffID = 1;
+
+  repeated uint64 DevelopersID = 2;
+
+  repeated uint64 PMsID = 3;
+
+
+}
+
+message SetProjectStaffReply{
+  Project project = 1;
+}
+
+message SetProjectPluginRequest{
+
+  uint64 ProjectID = 1;
+
+  PLUGIN_STATUS Status = 2;
+
+  // 操作者ID
+  uint64 StaffID = 3;
+
+}
+
+message SetProjectPluginReply{
+  ProjectPlugin Plugin = 1;
+}
+
+
+
