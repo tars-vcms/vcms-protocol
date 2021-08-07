@@ -139,6 +139,8 @@ message SetProjectPluginRequest{
   // 操作者ID
   uint64 StaffID = 3;
 
+  map<string,string> PluginInfo = 4;
+
 }
 
 message SetProjectPluginReply{

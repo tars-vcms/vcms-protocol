@@ -36,9 +36,8 @@ message Config{
 message ConfigEnv{
   uint64                ID = 1;
   uint64                ConfigID = 2;
-  repeated ConfigItem   item = 3;
-  string                Name = 4;
-  int64                CreatedAt = 5;
+  string                Name = 3;
+  int64                CreatedAt = 4;
 }
 
 message ConfigItem{
