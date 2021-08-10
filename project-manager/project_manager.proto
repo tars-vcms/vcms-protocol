@@ -46,26 +46,28 @@ enum PLUGIN_STATUS{
 
 
 message Project{
-  uint64 ID = 1;
+  int64 ID = 1;
 
   string Name = 2;
 
   PROJECT_VISIBILITY Visibility = 3;
 
-  repeated uint64 DevelopersID = 4;
+  PROJECT_TYPE Type = 4;
 
-  repeated uint64 PMsID = 5;
+  repeated int64 DevelopersID = 5;
 
-  repeated ProjectPlugin Plugins = 6;
+  repeated int64 PMsID = 6;
 
-  int64 CreatedAt = 7;
+  repeated ProjectPlugin Plugins = 7;
+
+  int64 CreatedAt = 8;
 }
 
 message ProjectPlugin{
 
-  uint64 ProjectID = 1;
+  int64 ProjectID = 1;
 
-  uint64 PluginID = 2;
+  int64 PluginID = 2;
 
   map<string,string> PluginInfo = 3;
 
@@ -75,7 +77,7 @@ message ProjectPlugin{
 message CreateProjectRequest{
   string Name = 1;
   // 创建者的用户ID 设置为默认开发
-  uint64 StaffID = 2;
+  int64 StaffID = 2;
   // 项目类型，是否为插件
   PROJECT_TYPE Type = 3;
 
@@ -88,10 +90,10 @@ message CreateProjectReply{
 message DeleteProjectRequest{
 
   // 删除的项目ID
-  uint64 ProjectID = 1;
+  int64 ProjectID = 1;
 
   // 操作人的ID
-  uint64 StaffID = 2;
+  int64 StaffID = 2;
 
   string Reason = 3;
 
@@ -104,10 +106,10 @@ message DeleteProjectReply{
 message GetProjectsRequest{
 
   // 为空表示根据其他条件搜索
-  uint64 StaffID = 1;
+  int64 StaffID = 1;
 
   // 为空表示根据其他条件搜索
-  repeated uint64 ProjectID = 2;
+  repeated int64 ProjectID = 2;
 };
 
 message GetProjectsReply{
@@ -117,11 +119,11 @@ message GetProjectsReply{
 message SetProjectStaffRequest{
 
   // 操作人ID
-  uint64 StaffID = 1;
+  int64 StaffID = 1;
 
-  repeated uint64 DevelopersID = 2;
+  repeated int64 DevelopersID = 2;
 
-  repeated uint64 PMsID = 3;
+  repeated int64 PMsID = 3;
 
 
 }
@@ -132,12 +134,12 @@ message SetProjectStaffReply{
 
 message SetProjectPluginRequest{
 
-  uint64 ProjectID = 1;
+  int64 ProjectID = 1;
 
   PLUGIN_STATUS Status = 2;
 
   // 操作者ID
-  uint64 StaffID = 3;
+  int64 StaffID = 3;
 
   map<string,string> PluginInfo = 4;
 
