@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package tars_vcms.id_generator;
+
+option go_package ="id_generator";
+
+service IDGenerator{
+  // GetWorkerID 获取单个应用内唯一应用ID
+ rpc GetWorkerID(GetWorkerIDRequest) returns(GetWorkerIDReply);
+}
+
+message GetWorkerIDRequest{
+
+  // WorkerName 应用名，同类应用应保持一致
+  string WorkerName = 1;
+
+  // OldWorkerID 重新申请应用ID时使用
+  string OldWorkerID = 2;
+}
+
+message GetWorkerIDReply{
+  int64 WorkerID = 1;
+
+  int64 EffectiveTime = 2;
+}
