@@ -1,0 +1,128 @@
+module project_manager{
+
+    enum PROJECT_TYPE{
+        // 用于构建平台自身的插件
+        PLUGIN,
+        // 业务项目
+        BUSINESS,
+        // 平台
+        PLATFORM,
+    };
+
+    enum PROJECT_VISIBILITY{
+        // 开发，产品可见
+        PRODUCT_OWNER,
+
+        // 所有人可见
+        PUBLIC,
+
+        // 有权限的可见
+        HAVE_AUTHORIZATION,
+    };
+
+    enum PLUGIN_STATUS{
+        ENABLED,
+        DISABLED,
+    };
+
+
+    struct ProjectPlugin{
+        0 require long ProjectID;
+
+        1 require long PluginID;
+
+        2 require map<string, string> PluginInfo;
+    };
+
+    struct Project{
+        0 require long ID;
+
+        1 require string Name;
+
+        2 require PROJECT_VISIBILITY Visibility;
+
+        3 require PROJECT_TYPE Type;
+
+        4 require vector<long> DevelopersID;
+
+        5 require vector<long> PMsID;
+
+        6 require vector<ProjectPlugin> Plugins;
+
+        7 require long CreatedAt;
+    };
+
+    struct CreateProjectRequest{
+        0 require string Name;
+
+        1 require long StaffID;
+
+        2 require PROJECT_TYPE Type;
+    };
+
+    struct CreateProjectReply{
+        0 require Project Project;
+    };
+
+    struct DeleteProjectRequest{
+        0 require long ProjectID;
+
+        1 require long StaffID;
+
+        2 require string Reason;
+
+    };
+
+    struct DeleteProjectReply{
+
+    };
+
+    struct GetProjectsRequest{
+        0 optional long StaffID;
+
+        1 optional vector<long> ProjectsID;
+
+    };
+
+    struct GetProjectsReply{
+        0 require vector<Project> Projects;
+    };
+
+    struct SetProjectStaffRequest{
+        0 require long StaffID;
+
+        1 require vector<long> DevelopersID;
+
+        2 require vector<long> PMsID;
+    };
+
+    struct SetProjectStaffReply{
+
+    };
+
+    struct SetProjectPluginRequest{
+        0 require long ProjectID;
+
+        1 require PLUGIN_STATUS Status;
+
+        2 require long StaffID;
+
+        3 require map<string,string> PluginInfo;
+    };
+
+    struct SetProjectPluginReply{
+
+    };
+
+    interface ProjectManager{
+        int CreateProject(CreateProjectRequest input, out CreateProjectReply output);
+
+        int DeleteProject(DeleteProjectRequest input, out DeleteProjectReply output);
+
+        int GetProjects(GetProjectsRequest input, out GetProjectsReply output);
+
+        int SetProjectStaff(SetProjectStaffRequest input, out SetProjectStaffReply output);
+
+        int SetProjectPlugin(SetProjectPluginRequest input, out SetProjectPluginReply output);
+    };
+};
