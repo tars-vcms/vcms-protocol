@@ -109,7 +109,7 @@ message GetProjectsRequest{
   int64 StaffID = 1;
 
   // 为空表示根据其他条件搜索
-  repeated int64 ProjectID = 2;
+  repeated int64 ProjectsID = 2;
 };
 
 message GetProjectsReply{
