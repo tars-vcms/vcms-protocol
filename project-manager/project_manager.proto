@@ -10,7 +10,7 @@ service ProjectManager{
 
   rpc DeleteProject(DeleteProjectRequest) returns(DeleteProjectReply);
 
-  rpc GetProjects(GetProjectsReply) returns(GetProjectsRequest);
+  rpc GetProjects(GetProjectsRequest) returns(GetProjectsReply);
 
   rpc SetProjectStaff(SetProjectStaffRequest) returns(SetProjectStaffReply);
 

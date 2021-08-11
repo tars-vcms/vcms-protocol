@@ -15,7 +15,7 @@ message GetWorkerIDRequest{
   string WorkerName = 1;
 
   // OldWorkerID 重新申请应用ID时使用
-  string OldWorkerID = 2;
+  int64 OldWorkerID = 2;
 }
 
 message GetWorkerIDReply{
