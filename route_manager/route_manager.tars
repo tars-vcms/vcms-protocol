@@ -1,0 +1,145 @@
+#include "../rbac_server/rbac_server.tars"
+module route_manager{
+
+
+    enum SERVANT_TYPE{
+
+        TARS_SERVANT,
+
+        RESERVE_PROXY_SERVANT ,
+    };
+
+
+    struct RouteTable{
+
+        0 require long RouteTableID;
+
+        1 require string Path;
+
+        2 require string ServantName;
+
+        3 require string FuncName;
+                         
+        4 require string InputName;
+
+        5 require string OutputName;
+
+        6 require SERVANT_TYPE Type;
+
+        7 optional rbac_server::RouteAuth Auth;
+
+        8 require vector<string> TransparentHeaders;
+
+        9 optional vector<RouteTable> Children;
+
+    };
+
+    struct Route{
+
+        0 require long RouteID;
+
+        1 require string RouteName;
+
+        2 require string GatewayName;
+
+    };
+
+    interface HttpRoute{
+
+        // CreateRoute 创建路由
+        int CreateRoute(CreateRouteRequest input, out CreateRouteReply output);
+
+        // GetRoutes 获取路由(批量接口)
+        int GetRoutes(GetRoutesRequest input, out GetRoutesReply output);
+
+        // DeleteRouter 删除路由 必须路由表为空
+        int DeleteRoute(DeleteRouteRequest input, out DeleteRouteReply output);
+
+        // GetRouteTable 因为路由表可能过大 单独抽离异步获取
+        int GetRouteTable(GetRouteTableRequest input, out GetRouteTableReply output);
+
+        // CreateRouteTable 新建路由表
+        int CreateRouteTable(CreateRouteTableRequest input, out CreateRouteTableReply output);
+
+        // DeleteRouteTable 删除路由表
+        int DeleteRouteTable(DeleteRouteTableRequest input, out DeleteRouteTableReply output);
+
+        // EditRouteTable 修改路由表
+        int EditRouteTable(EditRouteTableRequest input, out EditRouteTableReply output);
+
+
+    };
+
+    struct CreateRouteRequest{
+        0 require string Name;
+    };
+
+    struct CreateRouteReply{
+        0 require long RouteID;
+    };
+
+    struct GetRoutesRequest{
+        0 optional long RouteID;
+
+        1 optional long RouterName;
+    };
+
+    struct GetRoutesReply{
+        0 require vector<Route> Routes;
+    };
+
+    struct DeleteRouteRequest{
+        0 require long RouteID;
+    };
+
+    struct DeleteRouteReply{
+
+    };
+
+    struct GetRouteTableRequest{
+        0 require long RouteID;
+    };
+
+    struct GetRouteTableReply{
+        0 require vector<RouteTable> Routes;
+    };
+
+    struct CreateRouteTableRequest{
+        0 require long RouteID;
+
+        // 输入为空表示为根
+        1 optional long FatherRouteTableID;
+
+        2 require RouteTable RouteTable;
+
+    };
+
+    struct CreateRouteTableReply{
+
+    };
+
+    struct DeleteRouteTableRequest{
+        0 require long RouteID;
+
+        1 require long RouteTableID;
+
+    };
+
+    struct DeleteRouteTableReply{
+
+    };
+
+    struct EditRouteTableRequest{
+        0 require long RouteID;
+
+        1 require RouteTable RouteTable;
+    };
+
+    struct EditRouteTableReply{
+
+    };
+
+
+
+
+};

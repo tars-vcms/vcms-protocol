@@ -1,0 +1,16 @@
+module rbac_server{
+
+    enum AuthType{
+        TOKEN,
+        API
+    };
+
+    struct RouteAuth{
+        0 require AuthType Type;
+
+        1 optional vector<string> RolesName;
+
+        2 optional long RbacID;
+    };
+
+};
