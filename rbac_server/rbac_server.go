@@ -13,18 +13,18 @@ import (
 var _ = fmt.Errorf
 var _ = codec.FromInt8
 
-type AuthType int32
+type AUTH_TYPE int32
 
 const (
-	AuthType_TOKEN = 0
-	AuthType_API   = 1
+	AUTH_TYPE_TOKEN = 0
+	AUTH_TYPE_API   = 1
 )
 
 // RouteAuth struct implement
 type RouteAuth struct {
-	Type      AuthType `json:"Type"`
-	RolesName []string `json:"RolesName"`
-	RbacID    int64    `json:"RbacID"`
+	Type      AUTH_TYPE `json:"Type"`
+	RolesName []string  `json:"RolesName"`
+	RbacID    int64     `json:"RbacID"`
 }
 
 func (st *RouteAuth) ResetDefault() {
