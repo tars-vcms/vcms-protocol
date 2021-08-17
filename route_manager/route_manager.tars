@@ -36,7 +36,7 @@ module route_manager{
 
     };
 
-    struct Route{
+    struct RouteManager{
 
         0 require long RouteID;
 
