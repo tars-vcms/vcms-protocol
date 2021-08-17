@@ -19,6 +19,7 @@ type SERVANT_TYPE int32
 const (
 	SERVANT_TYPE_TARS_SERVANT          = 0
 	SERVANT_TYPE_RESERVE_PROXY_SERVANT = 1
+	SERVANT_TYPE_DICTIONARY_SERVANT    = 2
 )
 
 // RouteTable struct implement

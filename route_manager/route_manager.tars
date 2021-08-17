@@ -7,6 +7,8 @@ module route_manager{
         TARS_SERVANT,
 
         RESERVE_PROXY_SERVANT ,
+
+        DICTIONARY_SERVANT
     };
 
 
