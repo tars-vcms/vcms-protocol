@@ -7,7 +7,6 @@ import (
 	"fmt"
 
 	"github.com/TarsCloud/TarsGo/tars/protocol/codec"
-	"github.com/tars-vcms/vcms-protocol/rbac_server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -24,20 +23,19 @@ const (
 
 // RouteTable struct implement
 type RouteTable struct {
-	RouteTableID       int64                 `json:"RouteTableID"`
-	Path               string                `json:"Path"`
-	ServantName        string                `json:"ServantName"`
-	FuncName           string                `json:"FuncName"`
-	InputName          string                `json:"InputName"`
-	OutputName         string                `json:"OutputName"`
-	Type               SERVANT_TYPE          `json:"Type"`
-	Auth               rbac_server.RouteAuth `json:"Auth"`
-	TransparentHeaders []string              `json:"TransparentHeaders"`
-	Children           []RouteTable          `json:"Children"`
+	RouteTableID       int64        `json:"RouteTableID"`
+	Path               string       `json:"Path"`
+	ServantName        string       `json:"ServantName"`
+	FuncName           string       `json:"FuncName"`
+	InputName          string       `json:"InputName"`
+	OutputName         string       `json:"OutputName"`
+	Type               SERVANT_TYPE `json:"Type"`
+	AuthID             int64        `json:"AuthID"`
+	TransparentHeaders []string     `json:"TransparentHeaders"`
+	Children           []RouteTable `json:"Children"`
 }
 
 func (st *RouteTable) ResetDefault() {
-	st.Auth.ResetDefault()
 }
 
 //ReadFrom reads  from _is and put into struct.
@@ -83,7 +81,7 @@ func (st *RouteTable) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err = st.Auth.ReadBlock(_is, 7, false)
+	err = _is.Read_int64(&st.AuthID, 7, false)
 	if err != nil {
 		return err
 	}
@@ -234,7 +232,7 @@ func (st *RouteTable) WriteTo(_os *codec.Buffer) error {
 		return err
 	}
 
-	err = st.Auth.WriteBlock(_os, 7)
+	err = _os.Write_int64(st.AuthID, 7)
 	if err != nil {
 		return err
 	}
