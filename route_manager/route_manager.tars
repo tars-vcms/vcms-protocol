@@ -112,7 +112,7 @@ module route_manager{
     struct GetRoutesRequest{
         0 optional long RouteID;
 
-        1 optional long RouteName;
+        1 optional string RouteName;
     };
 
     struct GetRoutesReply{
