@@ -96,7 +96,7 @@ module route_manager{
     };
 
     struct GetGatewaysReply {
-        0 require vector<Gateway> Gateway;
+        0 require vector<Gateway> Gateways;
     };
 
     struct CreateRouteRequest{

@@ -784,7 +784,7 @@ func (st *GetGatewaysRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // GetGatewaysReply struct implement
 type GetGatewaysReply struct {
-	Gateway []Gateway `json:"Gateway"`
+	Gateways []Gateway `json:"Gateways"`
 }
 
 func (st *GetGatewaysReply) ResetDefault() {
@@ -809,10 +809,10 @@ func (st *GetGatewaysReply) ReadFrom(_is *codec.Reader) error {
 			return err
 		}
 
-		st.Gateway = make([]Gateway, length)
+		st.Gateways = make([]Gateway, length)
 		for i0, e0 := int32(0), length; i0 < e0; i0++ {
 
-			err = st.Gateway[i0].ReadBlock(_is, 0, false)
+			err = st.Gateways[i0].ReadBlock(_is, 0, false)
 			if err != nil {
 				return err
 			}
@@ -878,12 +878,12 @@ func (st *GetGatewaysReply) WriteTo(_os *codec.Buffer) error {
 		return err
 	}
 
-	err = _os.Write_int32(int32(len(st.Gateway)), 0)
+	err = _os.Write_int32(int32(len(st.Gateways)), 0)
 	if err != nil {
 		return err
 	}
 
-	for _, v := range st.Gateway {
+	for _, v := range st.Gateways {
 
 		err = v.WriteBlock(_os, 0)
 		if err != nil {
