@@ -45,7 +45,19 @@ module route_manager{
 
     };
 
+    struct Gateway{
+        0 require long GatewayID;
+
+        1 require string GatewayName;
+    };
+
     interface HttpRoute{
+
+        // CreateRoute 创建网关
+        int CreateGateway(CreateGatewayRequest input, out CreateGatewayReply output);
+
+        // GetGateways 查询网关
+        int GetTateways(GetGatewaysRequest input, out GetGatewaysReply output);
 
         // CreateRoute 创建路由
         int CreateRoute(CreateRouteRequest input, out CreateRouteReply output);
@@ -71,8 +83,26 @@ module route_manager{
 
     };
 
+    struct CreateGatewayRequest {
+        0 require string Name;
+    };
+
+    struct CreateGatewayReply {
+
+    };
+
+    struct GetGatewaysRequest {
+        0 require string Name;
+    };
+
+    struct GetGatewaysReply {
+        0 require vector<Gateway> Gateway;
+    };
+
     struct CreateRouteRequest{
         0 require string Name;
+
+        1 require string Gateway;
     };
 
     struct CreateRouteReply{

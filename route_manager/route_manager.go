@@ -414,9 +414,513 @@ func (st *Route) WriteBlock(_os *codec.Buffer, tag byte) error {
 	return nil
 }
 
+// Gateway struct implement
+type Gateway struct {
+	GatewayID   int64  `json:"GatewayID"`
+	GatewayName string `json:"GatewayName"`
+}
+
+func (st *Gateway) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *Gateway) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_int64(&st.GatewayID, 0, true)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.GatewayName, 1, true)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *Gateway) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require Gateway, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *Gateway) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_int64(st.GatewayID, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.GatewayName, 1)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *Gateway) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// CreateGatewayRequest struct implement
+type CreateGatewayRequest struct {
+	Name string `json:"Name"`
+}
+
+func (st *CreateGatewayRequest) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *CreateGatewayRequest) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_string(&st.Name, 0, true)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *CreateGatewayRequest) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require CreateGatewayRequest, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *CreateGatewayRequest) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_string(st.Name, 0)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *CreateGatewayRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// CreateGatewayReply struct implement
+type CreateGatewayReply struct {
+}
+
+func (st *CreateGatewayReply) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *CreateGatewayReply) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *CreateGatewayReply) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require CreateGatewayReply, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *CreateGatewayReply) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *CreateGatewayReply) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// GetGatewaysRequest struct implement
+type GetGatewaysRequest struct {
+	Name string `json:"Name"`
+}
+
+func (st *GetGatewaysRequest) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *GetGatewaysRequest) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err = _is.Read_string(&st.Name, 0, true)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *GetGatewaysRequest) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require GetGatewaysRequest, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *GetGatewaysRequest) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.Write_string(st.Name, 0)
+	if err != nil {
+		return err
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *GetGatewaysRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// GetGatewaysReply struct implement
+type GetGatewaysReply struct {
+	Gateway []Gateway `json:"Gateway"`
+}
+
+func (st *GetGatewaysReply) ResetDefault() {
+}
+
+//ReadFrom reads  from _is and put into struct.
+func (st *GetGatewaysReply) ReadFrom(_is *codec.Reader) error {
+	var err error
+	var length int32
+	var have bool
+	var ty byte
+	st.ResetDefault()
+
+	err, have, ty = _is.SkipToNoCheck(0, true)
+	if err != nil {
+		return err
+	}
+
+	if ty == codec.LIST {
+		err = _is.Read_int32(&length, 0, true)
+		if err != nil {
+			return err
+		}
+
+		st.Gateway = make([]Gateway, length)
+		for i0, e0 := int32(0), length; i0 < e0; i0++ {
+
+			err = st.Gateway[i0].ReadBlock(_is, 0, false)
+			if err != nil {
+				return err
+			}
+
+		}
+	} else if ty == codec.SIMPLE_LIST {
+		err = fmt.Errorf("not support simple_list type")
+		if err != nil {
+			return err
+		}
+
+	} else {
+		err = fmt.Errorf("require vector, but not")
+		if err != nil {
+			return err
+		}
+
+	}
+
+	_ = err
+	_ = length
+	_ = have
+	_ = ty
+	return nil
+}
+
+//ReadBlock reads struct from the given tag , require or optional.
+func (st *GetGatewaysReply) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+	var err error
+	var have bool
+	st.ResetDefault()
+
+	err, have = _is.SkipTo(codec.STRUCT_BEGIN, tag, require)
+	if err != nil {
+		return err
+	}
+	if !have {
+		if require {
+			return fmt.Errorf("require GetGatewaysReply, but not exist. tag %d", tag)
+		}
+		return nil
+	}
+
+	err = st.ReadFrom(_is)
+	if err != nil {
+		return err
+	}
+
+	err = _is.SkipToStructEnd()
+	if err != nil {
+		return err
+	}
+	_ = have
+	return nil
+}
+
+//WriteTo encode struct to buffer
+func (st *GetGatewaysReply) WriteTo(_os *codec.Buffer) error {
+	var err error
+
+	err = _os.WriteHead(codec.LIST, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(st.Gateway)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range st.Gateway {
+
+		err = v.WriteBlock(_os, 0)
+		if err != nil {
+			return err
+		}
+
+	}
+
+	_ = err
+
+	return nil
+}
+
+//WriteBlock encode struct
+func (st *GetGatewaysReply) WriteBlock(_os *codec.Buffer, tag byte) error {
+	var err error
+	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
+	if err != nil {
+		return err
+	}
+
+	err = st.WriteTo(_os)
+	if err != nil {
+		return err
+	}
+
+	err = _os.WriteHead(codec.STRUCT_END, 0)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 // CreateRouteRequest struct implement
 type CreateRouteRequest struct {
-	Name string `json:"Name"`
+	Name    string `json:"Name"`
+	Gateway string `json:"Gateway"`
 }
 
 func (st *CreateRouteRequest) ResetDefault() {
@@ -431,6 +935,11 @@ func (st *CreateRouteRequest) ReadFrom(_is *codec.Reader) error {
 	st.ResetDefault()
 
 	err = _is.Read_string(&st.Name, 0, true)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_string(&st.Gateway, 1, true)
 	if err != nil {
 		return err
 	}
@@ -477,6 +986,11 @@ func (st *CreateRouteRequest) WriteTo(_os *codec.Buffer) error {
 	var err error
 
 	err = _os.Write_string(st.Name, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_string(st.Gateway, 1)
 	if err != nil {
 		return err
 	}

@@ -28,6 +28,412 @@ type HttpRoute struct {
 	s m.Servant
 }
 
+//CreateGateway is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) CreateGateway(input *CreateGatewayRequest, output *CreateGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "CreateGateway", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&ret, 0, true)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).ReadBlock(_is, 2, true)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
+//CreateGatewayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) CreateGatewayWithContext(tarsCtx context.Context, input *CreateGatewayRequest, output *CreateGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "CreateGateway", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&ret, 0, true)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).ReadBlock(_is, 2, true)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
+//CreateGatewayOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) CreateGatewayOneWayWithContext(tarsCtx context.Context, input *CreateGatewayRequest, output *CreateGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "CreateGateway", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
+//GetTateways is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetTateways(input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+	tarsCtx := context.Background()
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&ret, 0, true)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).ReadBlock(_is, 2, true)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
+//GetTatewaysWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetTatewaysWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	_is := codec.NewReader(tools.Int8ToByte(_resp.SBuffer))
+	err = _is.Read_int32(&ret, 0, true)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).ReadBlock(_is, 2, true)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
+//GetTatewaysOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetTatewaysOneWayWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+
+	var length int32
+	var have bool
+	var ty byte
+	_os := codec.NewBuffer()
+	err = input.WriteBlock(_os, 1)
+	if err != nil {
+		return ret, err
+	}
+
+	err = (*output).WriteBlock(_os, 2)
+	if err != nil {
+		return ret, err
+	}
+
+	var _status map[string]string
+	var _context map[string]string
+	if len(_opt) == 1 {
+		_context = _opt[0]
+	} else if len(_opt) == 2 {
+		_context = _opt[0]
+		_status = _opt[1]
+	}
+	_resp := new(requestf.ResponsePacket)
+
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	if err != nil {
+		return ret, err
+	}
+
+	if len(_opt) == 1 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+	} else if len(_opt) == 2 {
+		for k := range _context {
+			delete(_context, k)
+		}
+		for k, v := range _resp.Context {
+			_context[k] = v
+		}
+		for k := range _status {
+			delete(_status, k)
+		}
+		for k, v := range _resp.Status {
+			_status[k] = v
+		}
+
+	}
+	_ = length
+	_ = have
+	_ = ty
+	return ret, nil
+}
+
 //CreateRoute is the proxy function for the method defined in the tars file, with the context
 func (_obj *HttpRoute) CreateRoute(input *CreateRouteRequest, output *CreateRouteReply, _opt ...map[string]string) (ret int32, err error) {
 
@@ -1475,6 +1881,8 @@ func (_obj *HttpRoute) AddServantWithContext(imp _impHttpRouteWithContext, obj s
 }
 
 type _impHttpRoute interface {
+	CreateGateway(input *CreateGatewayRequest, output *CreateGatewayReply) (ret int32, err error)
+	GetTateways(input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
 	CreateRoute(input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
@@ -1484,6 +1892,8 @@ type _impHttpRoute interface {
 	EditRouteTable(input *EditRouteTableRequest, output *EditRouteTableReply) (ret int32, err error)
 }
 type _impHttpRouteWithContext interface {
+	CreateGateway(tarsCtx context.Context, input *CreateGatewayRequest, output *CreateGatewayReply) (ret int32, err error)
+	GetTateways(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
 	CreateRoute(tarsCtx context.Context, input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(tarsCtx context.Context, input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(tarsCtx context.Context, input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
@@ -1501,6 +1911,216 @@ func (_obj *HttpRoute) Dispatch(tarsCtx context.Context, _val interface{}, tarsR
 	_is := codec.NewReader(tools.Int8ToByte(tarsReq.SBuffer))
 	_os := codec.NewBuffer()
 	switch tarsReq.SFuncName {
+	case "CreateGateway":
+		var input CreateGatewayRequest
+		var output CreateGatewayReply
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = input.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("input", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = input.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["input"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &input); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version: %d", tarsReq.IVersion)
+			return err
+		}
+
+		var _funRet_ int32
+		if _withContext == false {
+			_imp := _val.(_impHttpRoute)
+			_funRet_, err = _imp.CreateGateway(&input, &output)
+		} else {
+			_imp := _val.(_impHttpRouteWithContext)
+			_funRet_, err = _imp.CreateGateway(tarsCtx, &input, &output)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_int32(_funRet_, 0)
+			if err != nil {
+				return err
+			}
+
+			err = output.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			err = _os.Write_int32(_funRet_, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("", _os.ToBytes())
+			_tupRsp_.PutBuffer("tars_ret", _os.ToBytes())
+
+			_os.Reset()
+			err = output.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("output", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["tars_ret"] = _funRet_
+			_rspJson_["output"] = output
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
+	case "GetTateways":
+		var input GetGatewaysRequest
+		var output GetGatewaysReply
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+
+			err = input.ReadBlock(_is, 1, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_reqTup_ := tup.NewUniAttribute()
+			_reqTup_.Decode(_is)
+
+			var _tupBuffer_ []byte
+
+			_reqTup_.GetBuffer("input", &_tupBuffer_)
+			_is.Reset(_tupBuffer_)
+			err = input.ReadBlock(_is, 0, true)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			var _jsonDat_ map[string]interface{}
+			err = json.Unmarshal(_is.ToBytes(), &_jsonDat_)
+			{
+				_jsonStr_, _ := json.Marshal(_jsonDat_["input"])
+				if err = json.Unmarshal([]byte(_jsonStr_), &input); err != nil {
+					return err
+				}
+			}
+
+		} else {
+			err = fmt.Errorf("Decode reqpacket fail, error version: %d", tarsReq.IVersion)
+			return err
+		}
+
+		var _funRet_ int32
+		if _withContext == false {
+			_imp := _val.(_impHttpRoute)
+			_funRet_, err = _imp.GetTateways(&input, &output)
+		} else {
+			_imp := _val.(_impHttpRouteWithContext)
+			_funRet_, err = _imp.GetTateways(tarsCtx, &input, &output)
+		}
+
+		if err != nil {
+			return err
+		}
+
+		if tarsReq.IVersion == basef.TARSVERSION {
+			_os.Reset()
+
+			err = _os.Write_int32(_funRet_, 0)
+			if err != nil {
+				return err
+			}
+
+			err = output.WriteBlock(_os, 2)
+			if err != nil {
+				return err
+			}
+
+		} else if tarsReq.IVersion == basef.TUPVERSION {
+			_tupRsp_ := tup.NewUniAttribute()
+
+			err = _os.Write_int32(_funRet_, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("", _os.ToBytes())
+			_tupRsp_.PutBuffer("tars_ret", _os.ToBytes())
+
+			_os.Reset()
+			err = output.WriteBlock(_os, 0)
+			if err != nil {
+				return err
+			}
+
+			_tupRsp_.PutBuffer("output", _os.ToBytes())
+
+			_os.Reset()
+			err = _tupRsp_.Encode(_os)
+			if err != nil {
+				return err
+			}
+		} else if tarsReq.IVersion == basef.JSONVERSION {
+			_rspJson_ := map[string]interface{}{}
+			_rspJson_["tars_ret"] = _funRet_
+			_rspJson_["output"] = output
+
+			var _rspByte_ []byte
+			if _rspByte_, err = json.Marshal(_rspJson_); err != nil {
+				return err
+			}
+
+			_os.Reset()
+			err = _os.Write_slice_uint8(_rspByte_)
+			if err != nil {
+				return err
+			}
+		}
 	case "CreateRoute":
 		var input CreateRouteRequest
 		var output CreateRouteReply
