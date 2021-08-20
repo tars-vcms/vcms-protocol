@@ -1043,8 +1043,8 @@ func (_obj *HttpRoute) DeleteRouteOneWayWithContext(tarsCtx context.Context, inp
 	return ret, nil
 }
 
-//GetRouteTable is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetRouteTable(input *GetRouteTableRequest, output *GetRouteTableReply, _opt ...map[string]string) (ret int32, err error) {
+//GetRouteTables is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetRouteTables(input *GetRouteTablesRequest, output *GetRouteTablesReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -1071,7 +1071,7 @@ func (_obj *HttpRoute) GetRouteTable(input *GetRouteTableRequest, output *GetRou
 	_resp := new(requestf.ResponsePacket)
 	tarsCtx := context.Background()
 
-	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetRouteTable", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetRouteTables", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -1115,8 +1115,8 @@ func (_obj *HttpRoute) GetRouteTable(input *GetRouteTableRequest, output *GetRou
 	return ret, nil
 }
 
-//GetRouteTableWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetRouteTableWithContext(tarsCtx context.Context, input *GetRouteTableRequest, output *GetRouteTableReply, _opt ...map[string]string) (ret int32, err error) {
+//GetRouteTablesWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetRouteTablesWithContext(tarsCtx context.Context, input *GetRouteTablesRequest, output *GetRouteTablesReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -1142,7 +1142,7 @@ func (_obj *HttpRoute) GetRouteTableWithContext(tarsCtx context.Context, input *
 	}
 	_resp := new(requestf.ResponsePacket)
 
-	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetRouteTable", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetRouteTables", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -1186,8 +1186,8 @@ func (_obj *HttpRoute) GetRouteTableWithContext(tarsCtx context.Context, input *
 	return ret, nil
 }
 
-//GetRouteTableOneWayWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetRouteTableOneWayWithContext(tarsCtx context.Context, input *GetRouteTableRequest, output *GetRouteTableReply, _opt ...map[string]string) (ret int32, err error) {
+//GetRouteTablesOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetRouteTablesOneWayWithContext(tarsCtx context.Context, input *GetRouteTablesRequest, output *GetRouteTablesReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -1213,7 +1213,7 @@ func (_obj *HttpRoute) GetRouteTableOneWayWithContext(tarsCtx context.Context, i
 	}
 	_resp := new(requestf.ResponsePacket)
 
-	err = _obj.s.Tars_invoke(tarsCtx, 1, "GetRouteTable", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "GetRouteTables", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -1886,7 +1886,7 @@ type _impHttpRoute interface {
 	CreateRoute(input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
-	GetRouteTable(input *GetRouteTableRequest, output *GetRouteTableReply) (ret int32, err error)
+	GetRouteTables(input *GetRouteTablesRequest, output *GetRouteTablesReply) (ret int32, err error)
 	CreateRouteTable(input *CreateRouteTableRequest, output *CreateRouteTableReply) (ret int32, err error)
 	DeleteRouteTable(input *DeleteRouteTableRequest, output *DeleteRouteTableReply) (ret int32, err error)
 	EditRouteTable(input *EditRouteTableRequest, output *EditRouteTableReply) (ret int32, err error)
@@ -1897,7 +1897,7 @@ type _impHttpRouteWithContext interface {
 	CreateRoute(tarsCtx context.Context, input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(tarsCtx context.Context, input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(tarsCtx context.Context, input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
-	GetRouteTable(tarsCtx context.Context, input *GetRouteTableRequest, output *GetRouteTableReply) (ret int32, err error)
+	GetRouteTables(tarsCtx context.Context, input *GetRouteTablesRequest, output *GetRouteTablesReply) (ret int32, err error)
 	CreateRouteTable(tarsCtx context.Context, input *CreateRouteTableRequest, output *CreateRouteTableReply) (ret int32, err error)
 	DeleteRouteTable(tarsCtx context.Context, input *DeleteRouteTableRequest, output *DeleteRouteTableReply) (ret int32, err error)
 	EditRouteTable(tarsCtx context.Context, input *EditRouteTableRequest, output *EditRouteTableReply) (ret int32, err error)
@@ -2436,9 +2436,9 @@ func (_obj *HttpRoute) Dispatch(tarsCtx context.Context, _val interface{}, tarsR
 				return err
 			}
 		}
-	case "GetRouteTable":
-		var input GetRouteTableRequest
-		var output GetRouteTableReply
+	case "GetRouteTables":
+		var input GetRouteTablesRequest
+		var output GetRouteTablesReply
 
 		if tarsReq.IVersion == basef.TARSVERSION {
 
@@ -2478,10 +2478,10 @@ func (_obj *HttpRoute) Dispatch(tarsCtx context.Context, _val interface{}, tarsR
 		var _funRet_ int32
 		if _withContext == false {
 			_imp := _val.(_impHttpRoute)
-			_funRet_, err = _imp.GetRouteTable(&input, &output)
+			_funRet_, err = _imp.GetRouteTables(&input, &output)
 		} else {
 			_imp := _val.(_impHttpRouteWithContext)
-			_funRet_, err = _imp.GetRouteTable(tarsCtx, &input, &output)
+			_funRet_, err = _imp.GetRouteTables(tarsCtx, &input, &output)
 		}
 
 		if err != nil {

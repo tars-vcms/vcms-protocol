@@ -1523,16 +1523,18 @@ func (st *DeleteRouteReply) WriteBlock(_os *codec.Buffer, tag byte) error {
 	return nil
 }
 
-// GetRouteTableRequest struct implement
-type GetRouteTableRequest struct {
+// GetRouteTablesRequest struct implement
+type GetRouteTablesRequest struct {
 	RouteID int64 `json:"RouteID"`
+	GetAll  bool  `json:"GetAll"`
 }
 
-func (st *GetRouteTableRequest) ResetDefault() {
+func (st *GetRouteTablesRequest) ResetDefault() {
+	st.GetAll = false
 }
 
 //ReadFrom reads  from _is and put into struct.
-func (st *GetRouteTableRequest) ReadFrom(_is *codec.Reader) error {
+func (st *GetRouteTablesRequest) ReadFrom(_is *codec.Reader) error {
 	var err error
 	var length int32
 	var have bool
@@ -1540,6 +1542,11 @@ func (st *GetRouteTableRequest) ReadFrom(_is *codec.Reader) error {
 	st.ResetDefault()
 
 	err = _is.Read_int64(&st.RouteID, 0, true)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_bool(&st.GetAll, 1, false)
 	if err != nil {
 		return err
 	}
@@ -1552,7 +1559,7 @@ func (st *GetRouteTableRequest) ReadFrom(_is *codec.Reader) error {
 }
 
 //ReadBlock reads struct from the given tag , require or optional.
-func (st *GetRouteTableRequest) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+func (st *GetRouteTablesRequest) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
 	var err error
 	var have bool
 	st.ResetDefault()
@@ -1563,7 +1570,7 @@ func (st *GetRouteTableRequest) ReadBlock(_is *codec.Reader, tag byte, require b
 	}
 	if !have {
 		if require {
-			return fmt.Errorf("require GetRouteTableRequest, but not exist. tag %d", tag)
+			return fmt.Errorf("require GetRouteTablesRequest, but not exist. tag %d", tag)
 		}
 		return nil
 	}
@@ -1582,10 +1589,15 @@ func (st *GetRouteTableRequest) ReadBlock(_is *codec.Reader, tag byte, require b
 }
 
 //WriteTo encode struct to buffer
-func (st *GetRouteTableRequest) WriteTo(_os *codec.Buffer) error {
+func (st *GetRouteTablesRequest) WriteTo(_os *codec.Buffer) error {
 	var err error
 
 	err = _os.Write_int64(st.RouteID, 0)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool(st.GetAll, 1)
 	if err != nil {
 		return err
 	}
@@ -1596,7 +1608,7 @@ func (st *GetRouteTableRequest) WriteTo(_os *codec.Buffer) error {
 }
 
 //WriteBlock encode struct
-func (st *GetRouteTableRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
+func (st *GetRouteTablesRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
 	var err error
 	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
 	if err != nil {
@@ -1615,16 +1627,16 @@ func (st *GetRouteTableRequest) WriteBlock(_os *codec.Buffer, tag byte) error {
 	return nil
 }
 
-// GetRouteTableReply struct implement
-type GetRouteTableReply struct {
+// GetRouteTablesReply struct implement
+type GetRouteTablesReply struct {
 	Routes []RouteTable `json:"Routes"`
 }
 
-func (st *GetRouteTableReply) ResetDefault() {
+func (st *GetRouteTablesReply) ResetDefault() {
 }
 
 //ReadFrom reads  from _is and put into struct.
-func (st *GetRouteTableReply) ReadFrom(_is *codec.Reader) error {
+func (st *GetRouteTablesReply) ReadFrom(_is *codec.Reader) error {
 	var err error
 	var length int32
 	var have bool
@@ -1673,7 +1685,7 @@ func (st *GetRouteTableReply) ReadFrom(_is *codec.Reader) error {
 }
 
 //ReadBlock reads struct from the given tag , require or optional.
-func (st *GetRouteTableReply) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
+func (st *GetRouteTablesReply) ReadBlock(_is *codec.Reader, tag byte, require bool) error {
 	var err error
 	var have bool
 	st.ResetDefault()
@@ -1684,7 +1696,7 @@ func (st *GetRouteTableReply) ReadBlock(_is *codec.Reader, tag byte, require boo
 	}
 	if !have {
 		if require {
-			return fmt.Errorf("require GetRouteTableReply, but not exist. tag %d", tag)
+			return fmt.Errorf("require GetRouteTablesReply, but not exist. tag %d", tag)
 		}
 		return nil
 	}
@@ -1703,7 +1715,7 @@ func (st *GetRouteTableReply) ReadBlock(_is *codec.Reader, tag byte, require boo
 }
 
 //WriteTo encode struct to buffer
-func (st *GetRouteTableReply) WriteTo(_os *codec.Buffer) error {
+func (st *GetRouteTablesReply) WriteTo(_os *codec.Buffer) error {
 	var err error
 
 	err = _os.WriteHead(codec.LIST, 0)
@@ -1731,7 +1743,7 @@ func (st *GetRouteTableReply) WriteTo(_os *codec.Buffer) error {
 }
 
 //WriteBlock encode struct
-func (st *GetRouteTableReply) WriteBlock(_os *codec.Buffer, tag byte) error {
+func (st *GetRouteTablesReply) WriteBlock(_os *codec.Buffer, tag byte) error {
 	var err error
 	err = _os.WriteHead(codec.STRUCT_BEGIN, tag)
 	if err != nil {

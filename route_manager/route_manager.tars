@@ -69,7 +69,7 @@ module route_manager{
         int DeleteRoute(DeleteRouteRequest input, out DeleteRouteReply output);
 
         // GetRouteTable 因为路由表可能过大 单独抽离异步获取
-        int GetRouteTable(GetRouteTableRequest input, out GetRouteTableReply output);
+        int GetRouteTables(GetRouteTablesRequest input, out GetRouteTablesReply output);
 
         // CreateRouteTable 新建路由表
         int CreateRouteTable(CreateRouteTableRequest input, out CreateRouteTableReply output);
@@ -127,11 +127,13 @@ module route_manager{
 
     };
 
-    struct GetRouteTableRequest{
+    struct GetRouteTablesRequest{
         0 require long RouteID;
+
+        1 optional bool GetAll = false;
     };
 
-    struct GetRouteTableReply{
+    struct GetRouteTablesReply{
         0 require vector<RouteTable> Routes;
     };
 
