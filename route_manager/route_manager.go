@@ -1114,8 +1114,8 @@ func (st *CreateRouteReply) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // GetRoutesRequest struct implement
 type GetRoutesRequest struct {
-	RouteID    int64 `json:"RouteID"`
-	RouterName int64 `json:"RouterName"`
+	RouteID   int64 `json:"RouteID"`
+	RouteName int64 `json:"RouteName"`
 }
 
 func (st *GetRoutesRequest) ResetDefault() {
@@ -1134,7 +1134,7 @@ func (st *GetRoutesRequest) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err = _is.Read_int64(&st.RouterName, 1, false)
+	err = _is.Read_int64(&st.RouteName, 1, false)
 	if err != nil {
 		return err
 	}
@@ -1185,7 +1185,7 @@ func (st *GetRoutesRequest) WriteTo(_os *codec.Buffer) error {
 		return err
 	}
 
-	err = _os.Write_int64(st.RouterName, 1)
+	err = _os.Write_int64(st.RouteName, 1)
 	if err != nil {
 		return err
 	}
