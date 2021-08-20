@@ -231,8 +231,8 @@ func (_obj *HttpRoute) CreateGatewayOneWayWithContext(tarsCtx context.Context, i
 	return ret, nil
 }
 
-//GetTateways is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetTateways(input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+//GetGateways is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetGateways(input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -259,7 +259,7 @@ func (_obj *HttpRoute) GetTateways(input *GetGatewaysRequest, output *GetGateway
 	_resp := new(requestf.ResponsePacket)
 	tarsCtx := context.Background()
 
-	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetGateways", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -303,8 +303,8 @@ func (_obj *HttpRoute) GetTateways(input *GetGatewaysRequest, output *GetGateway
 	return ret, nil
 }
 
-//GetTatewaysWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetTatewaysWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+//GetGatewaysWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetGatewaysWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -330,7 +330,7 @@ func (_obj *HttpRoute) GetTatewaysWithContext(tarsCtx context.Context, input *Ge
 	}
 	_resp := new(requestf.ResponsePacket)
 
-	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 0, "GetGateways", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -374,8 +374,8 @@ func (_obj *HttpRoute) GetTatewaysWithContext(tarsCtx context.Context, input *Ge
 	return ret, nil
 }
 
-//GetTatewaysOneWayWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *HttpRoute) GetTatewaysOneWayWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
+//GetGatewaysOneWayWithContext is the proxy function for the method defined in the tars file, with the context
+func (_obj *HttpRoute) GetGatewaysOneWayWithContext(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -401,7 +401,7 @@ func (_obj *HttpRoute) GetTatewaysOneWayWithContext(tarsCtx context.Context, inp
 	}
 	_resp := new(requestf.ResponsePacket)
 
-	err = _obj.s.Tars_invoke(tarsCtx, 1, "GetTateways", _os.ToBytes(), _status, _context, _resp)
+	err = _obj.s.Tars_invoke(tarsCtx, 1, "GetGateways", _os.ToBytes(), _status, _context, _resp)
 	if err != nil {
 		return ret, err
 	}
@@ -1882,7 +1882,7 @@ func (_obj *HttpRoute) AddServantWithContext(imp _impHttpRouteWithContext, obj s
 
 type _impHttpRoute interface {
 	CreateGateway(input *CreateGatewayRequest, output *CreateGatewayReply) (ret int32, err error)
-	GetTateways(input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
+	GetGateways(input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
 	CreateRoute(input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
@@ -1893,7 +1893,7 @@ type _impHttpRoute interface {
 }
 type _impHttpRouteWithContext interface {
 	CreateGateway(tarsCtx context.Context, input *CreateGatewayRequest, output *CreateGatewayReply) (ret int32, err error)
-	GetTateways(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
+	GetGateways(tarsCtx context.Context, input *GetGatewaysRequest, output *GetGatewaysReply) (ret int32, err error)
 	CreateRoute(tarsCtx context.Context, input *CreateRouteRequest, output *CreateRouteReply) (ret int32, err error)
 	GetRoutes(tarsCtx context.Context, input *GetRoutesRequest, output *GetRoutesReply) (ret int32, err error)
 	DeleteRoute(tarsCtx context.Context, input *DeleteRouteRequest, output *DeleteRouteReply) (ret int32, err error)
@@ -2016,7 +2016,7 @@ func (_obj *HttpRoute) Dispatch(tarsCtx context.Context, _val interface{}, tarsR
 				return err
 			}
 		}
-	case "GetTateways":
+	case "GetGateways":
 		var input GetGatewaysRequest
 		var output GetGatewaysReply
 
@@ -2058,10 +2058,10 @@ func (_obj *HttpRoute) Dispatch(tarsCtx context.Context, _val interface{}, tarsR
 		var _funRet_ int32
 		if _withContext == false {
 			_imp := _val.(_impHttpRoute)
-			_funRet_, err = _imp.GetTateways(&input, &output)
+			_funRet_, err = _imp.GetGateways(&input, &output)
 		} else {
 			_imp := _val.(_impHttpRouteWithContext)
-			_funRet_, err = _imp.GetTateways(tarsCtx, &input, &output)
+			_funRet_, err = _imp.GetGateways(tarsCtx, &input, &output)
 		}
 
 		if err != nil {

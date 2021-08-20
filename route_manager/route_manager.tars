@@ -57,7 +57,7 @@ module route_manager{
         int CreateGateway(CreateGatewayRequest input, out CreateGatewayReply output);
 
         // GetGateways 查询网关
-        int GetTateways(GetGatewaysRequest input, out GetGatewaysReply output);
+        int GetGateways(GetGatewaysRequest input, out GetGatewaysReply output);
 
         // CreateRoute 创建路由
         int CreateRoute(CreateRouteRequest input, out CreateRouteReply output);
