@@ -302,9 +302,9 @@ func (st *RouteTable) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // Route struct implement
 type Route struct {
-	RouteID     int64  `json:"RouteID"`
-	RouteName   string `json:"RouteName"`
-	GatewayName string `json:"GatewayName"`
+	RouteID   int64  `json:"RouteID"`
+	RouteName string `json:"RouteName"`
+	GatewayID int64  `json:"GatewayID"`
 }
 
 func (st *Route) ResetDefault() {
@@ -328,7 +328,7 @@ func (st *Route) ReadFrom(_is *codec.Reader) error {
 		return err
 	}
 
-	err = _is.Read_string(&st.GatewayName, 2, true)
+	err = _is.Read_int64(&st.GatewayID, 2, true)
 	if err != nil {
 		return err
 	}
@@ -384,7 +384,7 @@ func (st *Route) WriteTo(_os *codec.Buffer) error {
 		return err
 	}
 
-	err = _os.Write_string(st.GatewayName, 2)
+	err = _os.Write_int64(st.GatewayID, 2)
 	if err != nil {
 		return err
 	}

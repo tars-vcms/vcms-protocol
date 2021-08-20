@@ -41,7 +41,7 @@ module route_manager{
 
         1 require string RouteName;
 
-        2 require string GatewayName;
+        2 require long GatewayID;
 
     };
 
