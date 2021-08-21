@@ -1,0 +1,18 @@
+module vcms_admin{
+
+
+
+    struct PublishGatewayRequest {
+        0 require string GatewayName;
+    };
+
+    struct PublishGatewayReply {
+
+    };
+
+    interface Route {
+
+        int PublishGateway(PublishGatewayRequest input, out PublishGatewayReply output);
+
+    };
+};

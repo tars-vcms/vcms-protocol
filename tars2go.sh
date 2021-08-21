@@ -1,4 +1,4 @@
-packages=(route_manager rbac_server project_manager)
+packages=(route_manager rbac_server project_manager vcms_admin)
 
 for package in "${packages[@]}"; do
   cd "$(dirname "$0")"/"$package" || exit
