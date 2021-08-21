@@ -23,13 +23,13 @@ var _ = fmt.Errorf
 var _ = codec.FromInt8
 var _ = unsafe.Pointer(nil)
 
-//Route struct
-type Route struct {
+//System struct
+type System struct {
 	s m.Servant
 }
 
 //PublishGateway is the proxy function for the method defined in the tars file, with the context
-func (_obj *Route) PublishGateway(input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+func (_obj *System) PublishGateway(input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -101,7 +101,7 @@ func (_obj *Route) PublishGateway(input *PublishGatewayRequest, output *PublishG
 }
 
 //PublishGatewayWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *Route) PublishGatewayWithContext(tarsCtx context.Context, input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+func (_obj *System) PublishGatewayWithContext(tarsCtx context.Context, input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -172,7 +172,7 @@ func (_obj *Route) PublishGatewayWithContext(tarsCtx context.Context, input *Pub
 }
 
 //PublishGatewayOneWayWithContext is the proxy function for the method defined in the tars file, with the context
-func (_obj *Route) PublishGatewayOneWayWithContext(tarsCtx context.Context, input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
+func (_obj *System) PublishGatewayOneWayWithContext(tarsCtx context.Context, input *PublishGatewayRequest, output *PublishGatewayReply, _opt ...map[string]string) (ret int32, err error) {
 
 	var length int32
 	var have bool
@@ -232,39 +232,39 @@ func (_obj *Route) PublishGatewayOneWayWithContext(tarsCtx context.Context, inpu
 }
 
 //SetServant sets servant for the service.
-func (_obj *Route) SetServant(s m.Servant) {
+func (_obj *System) SetServant(s m.Servant) {
 	_obj.s = s
 }
 
 //TarsSetTimeout sets the timeout for the servant which is in ms.
-func (_obj *Route) TarsSetTimeout(t int) {
+func (_obj *System) TarsSetTimeout(t int) {
 	_obj.s.TarsSetTimeout(t)
 }
 
 //TarsSetProtocol sets the protocol for the servant.
-func (_obj *Route) TarsSetProtocol(p m.Protocol) {
+func (_obj *System) TarsSetProtocol(p m.Protocol) {
 	_obj.s.TarsSetProtocol(p)
 }
 
 //AddServant adds servant  for the service.
-func (_obj *Route) AddServant(imp _impRoute, obj string) {
+func (_obj *System) AddServant(imp _impSystem, obj string) {
 	tars.AddServant(_obj, imp, obj)
 }
 
 //AddServant adds servant  for the service with context.
-func (_obj *Route) AddServantWithContext(imp _impRouteWithContext, obj string) {
+func (_obj *System) AddServantWithContext(imp _impSystemWithContext, obj string) {
 	tars.AddServantWithContext(_obj, imp, obj)
 }
 
-type _impRoute interface {
+type _impSystem interface {
 	PublishGateway(input *PublishGatewayRequest, output *PublishGatewayReply) (ret int32, err error)
 }
-type _impRouteWithContext interface {
+type _impSystemWithContext interface {
 	PublishGateway(tarsCtx context.Context, input *PublishGatewayRequest, output *PublishGatewayReply) (ret int32, err error)
 }
 
 // Dispatch is used to call the server side implemnet for the method defined in the tars file. _withContext shows using context or not.
-func (_obj *Route) Dispatch(tarsCtx context.Context, _val interface{}, tarsReq *requestf.RequestPacket, tarsResp *requestf.ResponsePacket, _withContext bool) (err error) {
+func (_obj *System) Dispatch(tarsCtx context.Context, _val interface{}, tarsReq *requestf.RequestPacket, tarsResp *requestf.ResponsePacket, _withContext bool) (err error) {
 	var length int32
 	var have bool
 	var ty byte
@@ -312,10 +312,10 @@ func (_obj *Route) Dispatch(tarsCtx context.Context, _val interface{}, tarsReq *
 
 		var _funRet_ int32
 		if _withContext == false {
-			_imp := _val.(_impRoute)
+			_imp := _val.(_impSystem)
 			_funRet_, err = _imp.PublishGateway(&input, &output)
 		} else {
-			_imp := _val.(_impRouteWithContext)
+			_imp := _val.(_impSystemWithContext)
 			_funRet_, err = _imp.PublishGateway(tarsCtx, &input, &output)
 		}
 

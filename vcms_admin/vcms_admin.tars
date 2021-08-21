@@ -10,7 +10,7 @@ module vcms_admin{
 
     };
 
-    interface Route {
+    interface System {
 
 
         int PublishGateway(PublishGatewayRequest input, out PublishGatewayReply output);
