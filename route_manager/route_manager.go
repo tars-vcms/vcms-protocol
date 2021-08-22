@@ -416,8 +416,9 @@ func (st *Route) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // Gateway struct implement
 type Gateway struct {
-	GatewayID   int64  `json:"GatewayID"`
-	GatewayName string `json:"GatewayName"`
+	GatewayID   int64   `json:"GatewayID"`
+	GatewayName string  `json:"GatewayName"`
+	Routes      []Route `json:"Routes"`
 }
 
 func (st *Gateway) ResetDefault() {
@@ -439,6 +440,40 @@ func (st *Gateway) ReadFrom(_is *codec.Reader) error {
 	err = _is.Read_string(&st.GatewayName, 1, true)
 	if err != nil {
 		return err
+	}
+
+	err, have, ty = _is.SkipToNoCheck(2, true)
+	if err != nil {
+		return err
+	}
+
+	if ty == codec.LIST {
+		err = _is.Read_int32(&length, 0, true)
+		if err != nil {
+			return err
+		}
+
+		st.Routes = make([]Route, length)
+		for i0, e0 := int32(0), length; i0 < e0; i0++ {
+
+			err = st.Routes[i0].ReadBlock(_is, 0, false)
+			if err != nil {
+				return err
+			}
+
+		}
+	} else if ty == codec.SIMPLE_LIST {
+		err = fmt.Errorf("not support simple_list type")
+		if err != nil {
+			return err
+		}
+
+	} else {
+		err = fmt.Errorf("require vector, but not")
+		if err != nil {
+			return err
+		}
+
 	}
 
 	_ = err
@@ -490,6 +525,25 @@ func (st *Gateway) WriteTo(_os *codec.Buffer) error {
 	err = _os.Write_string(st.GatewayName, 1)
 	if err != nil {
 		return err
+	}
+
+	err = _os.WriteHead(codec.LIST, 2)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_int32(int32(len(st.Routes)), 0)
+	if err != nil {
+		return err
+	}
+
+	for _, v := range st.Routes {
+
+		err = v.WriteBlock(_os, 0)
+		if err != nil {
+			return err
+		}
+
 	}
 
 	_ = err
@@ -1114,11 +1168,13 @@ func (st *CreateRouteReply) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // GetRoutesRequest struct implement
 type GetRoutesRequest struct {
-	RouteID   int64  `json:"RouteID"`
-	RouteName string `json:"RouteName"`
+	RouteID    int64  `json:"RouteID"`
+	RouteName  string `json:"RouteName"`
+	WithRoutes bool   `json:"WithRoutes"`
 }
 
 func (st *GetRoutesRequest) ResetDefault() {
+	st.WithRoutes = false
 }
 
 //ReadFrom reads  from _is and put into struct.
@@ -1135,6 +1191,11 @@ func (st *GetRoutesRequest) ReadFrom(_is *codec.Reader) error {
 	}
 
 	err = _is.Read_string(&st.RouteName, 1, false)
+	if err != nil {
+		return err
+	}
+
+	err = _is.Read_bool(&st.WithRoutes, 2, false)
 	if err != nil {
 		return err
 	}
@@ -1186,6 +1247,11 @@ func (st *GetRoutesRequest) WriteTo(_os *codec.Buffer) error {
 	}
 
 	err = _os.Write_string(st.RouteName, 1)
+	if err != nil {
+		return err
+	}
+
+	err = _os.Write_bool(st.WithRoutes, 2)
 	if err != nil {
 		return err
 	}
@@ -1525,8 +1591,8 @@ func (st *DeleteRouteReply) WriteBlock(_os *codec.Buffer, tag byte) error {
 
 // GetRouteTablesRequest struct implement
 type GetRouteTablesRequest struct {
-	RouteID []int64 `json:"RouteID"`
-	GetAll  bool    `json:"GetAll"`
+	RouteID int64 `json:"RouteID"`
+	GetAll  bool  `json:"GetAll"`
 }
 
 func (st *GetRouteTablesRequest) ResetDefault() {
@@ -1541,38 +1607,9 @@ func (st *GetRouteTablesRequest) ReadFrom(_is *codec.Reader) error {
 	var ty byte
 	st.ResetDefault()
 
-	err, have, ty = _is.SkipToNoCheck(0, true)
+	err = _is.Read_int64(&st.RouteID, 0, true)
 	if err != nil {
 		return err
-	}
-
-	if ty == codec.LIST {
-		err = _is.Read_int32(&length, 0, true)
-		if err != nil {
-			return err
-		}
-
-		st.RouteID = make([]int64, length)
-		for i0, e0 := int32(0), length; i0 < e0; i0++ {
-
-			err = _is.Read_int64(&st.RouteID[i0], 0, false)
-			if err != nil {
-				return err
-			}
-
-		}
-	} else if ty == codec.SIMPLE_LIST {
-		err = fmt.Errorf("not support simple_list type")
-		if err != nil {
-			return err
-		}
-
-	} else {
-		err = fmt.Errorf("require vector, but not")
-		if err != nil {
-			return err
-		}
-
 	}
 
 	err = _is.Read_bool(&st.GetAll, 1, false)
@@ -1621,23 +1658,9 @@ func (st *GetRouteTablesRequest) ReadBlock(_is *codec.Reader, tag byte, require 
 func (st *GetRouteTablesRequest) WriteTo(_os *codec.Buffer) error {
 	var err error
 
-	err = _os.WriteHead(codec.LIST, 0)
+	err = _os.Write_int64(st.RouteID, 0)
 	if err != nil {
 		return err
-	}
-
-	err = _os.Write_int32(int32(len(st.RouteID)), 0)
-	if err != nil {
-		return err
-	}
-
-	for _, v := range st.RouteID {
-
-		err = _os.Write_int64(v, 0)
-		if err != nil {
-			return err
-		}
-
 	}
 
 	err = _os.Write_bool(st.GetAll, 1)

@@ -49,6 +49,8 @@ module route_manager{
         0 require long GatewayID;
 
         1 require string GatewayName;
+
+        2 require vector<Route> Routes;
     };
 
     interface HttpRoute{
@@ -113,6 +115,8 @@ module route_manager{
         0 optional long RouteID;
 
         1 optional string RouteName;
+
+        2 optional bool WithRoutes = false;
     };
 
     struct GetRoutesReply{
@@ -128,7 +132,7 @@ module route_manager{
     };
 
     struct GetRouteTablesRequest{
-        0 require vector<long> RouteID;
+        0 require long RouteID;
 
         1 optional bool GetAll = false;
     };
