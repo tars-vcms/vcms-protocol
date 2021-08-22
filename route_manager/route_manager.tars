@@ -128,7 +128,7 @@ module route_manager{
     };
 
     struct GetRouteTablesRequest{
-        0 require long RouteID;
+        0 require vector<long> RouteID;
 
         1 optional bool GetAll = false;
     };
